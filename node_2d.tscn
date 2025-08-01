@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpmh3w654mr7k"]
+[gd_scene load_steps=4 format=3 uid="uid://dhfk8c76nmaa4"]
 
-[ext_resource type="Texture2D" uid="uid://db4deuwd5qpqn" path="res://icon.svg" id="1_0e48y"]
-[ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://icon.gd" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://db4deuwd5qpqn" path="res://assets/ship/icon.svg" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://assets/ship/ship.gd" id="2_epypp"]
+[ext_resource type="PackedScene" uid="uid://dhx5ilfu2yke4" path="res://background.tscn" id="3_bg"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("3_bg")]
 
 [node name="SpaceShip" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(0.960937, 0.359375)
-texture = ExtResource("1_0e48y")
+texture = ExtResource("2_0e48y")
 script = ExtResource("2_epypp")
+friction = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="SpaceShip"]
 position = Vector2(0, 2.78261)
@@ -17,4 +21,4 @@ scale = Vector2(1.04065, 2.78261)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-413, -163)
-texture = ExtResource("1_0e48y")
+texture = ExtResource("2_0e48y")
