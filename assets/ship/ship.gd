@@ -38,13 +38,13 @@ func _process(delta):
 		velocity = velocity.normalized() * max_speed
 		
 	if Input.is_action_pressed("rotate_left"):
-		play("moving")
+		play("moving", 2)
 	elif Input.is_action_pressed("rotate_right"):
-		play("moving")
+		play("moving", 2)
 	elif Input.is_action_pressed("forward"):
-		play("moving")
+		play("moving", 2)
 	elif Input.is_action_pressed("backward"):
-		play("moving")
+		play("moving", 2)
 	else:
 		play("still")
 	velocity = velocity.move_toward(Vector2.ZERO, friction * delta)

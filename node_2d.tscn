@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://db4deuwd5qpqn" path="res://assets/ship/icon.svg" id="2_0e48y"]
 [ext_resource type="Texture2D" uid="uid://ci5gf41v3wees" path="res://assets/ship/ShipStill.png" id="2_0hol4"]
 [ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://assets/ship/ship.gd" id="2_epypp"]
-[ext_resource type="PackedScene" path="res://background.tscn" id="3_bg"]
+[ext_resource type="PackedScene" uid="uid://dhx5ilfu2yke4" path="res://background.tscn" id="3_bg"]
 [ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/ship/ShipMoving-Sheet.png" id="3_q6r6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
