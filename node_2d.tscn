@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpmh3w654mr7k"]
+
+[ext_resource type="Texture2D" uid="uid://db4deuwd5qpqn" path="res://icon.svg" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://icon.gd" id="2_epypp"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SpaceShip" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.960937, 0.359375)
+texture = ExtResource("1_0e48y")
+script = ExtResource("2_epypp")
+
+[node name="Camera2D" type="Camera2D" parent="SpaceShip"]
+position = Vector2(0, 2.78261)
+scale = Vector2(1.04065, 2.78261)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-413, -163)
+texture = ExtResource("1_0e48y")
