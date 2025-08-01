@@ -3,8 +3,8 @@ extends Sprite2D
 @export var move_acceleration: float = 600.0      # Movement force
 @export var max_speed: float = 400.0              # Maximum linear speed
 @export var friction: float = 64.0                # Higher = more slippery
-@export var rotation_acceleration: float = 450.0  # Angular acceleration (deg/s^2)
-@export var max_angular_speed: float = 300.0      # Maximum angular speed (deg/s)
+@export var rotation_acceleration: float = 300.0  # Angular acceleration (deg/s^2)
+@export var max_angular_speed: float = 250.0      # Maximum angular speed (deg/s)
 @export var rotation_friction: float = 32.0        # Higher = more slippery (rotational)
 
 var velocity: Vector2 = Vector2.ZERO
@@ -27,9 +27,12 @@ func _process(delta):
 	var direction = Vector2.UP.rotated(rotation)
 	if Input.is_action_pressed("forward"):
 		thrust += direction * move_acceleration
+		if not (Input.is_action_pressed("rotate_left") or Input.is_action_pressed("rotate_right")):
+			angular_velocity *= 0.95
 	if Input.is_action_pressed("backward"):
 		thrust -= direction * move_acceleration
-
+		if not (Input.is_action_pressed("rotate_left") or Input.is_action_pressed("rotate_right")):
+			angular_velocity *= 0.95
 	velocity += thrust * delta
 	if velocity.length() > max_speed:
 		velocity = velocity.normalized() * max_speed
