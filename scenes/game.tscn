@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpmh3w654mr7k"]
+[gd_scene load_steps=23 format=3 uid="uid://dpmh3w654mr7k"]
 
 [ext_resource type="PackedScene" uid="uid://dvvycmh1tdk16" path="res://scenes/universe.tscn" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/Ship/ShipMoving-Sheet.png" id="2_u5sy4"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cgdjfyn2854vi" path="res://assets/Ship/YeetGun-Sheet.png" id="6_0tnpc"]
 [ext_resource type="Script" uid="uid://dwo1hn6fcspyy" path="res://scripts/gunshoot.gd" id="8_gee14"]
 [ext_resource type="Texture2D" uid="uid://btv5vk8umggrv" path="res://assets/Background/Background2.png" id="9_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://bd3v66dwkp1k7" path="res://assets/Planet/Planet1-Sheet.png" id="10_kvpfn"]
+[ext_resource type="ButtonGroup" uid="uid://bycf8jtpcwx2k" path="res://assets/Buttons/PlanetPickerGroup.tres" id="10_kvuet"]
+[ext_resource type="Texture2D" uid="uid://b80e83boks7wt" path="res://assets/Star/Sun-Sheet.png" id="11_dinhu"]
+[ext_resource type="Texture2D" uid="uid://cdmmn7o6h5b2k" path="res://assets/Satelite/Satelite.png" id="11_kvuet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
 atlas = ExtResource("2_u5sy4")
@@ -68,6 +72,14 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
+atlas = ExtResource("10_kvpfn")
+region = Rect2(0, 0, 128, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
+atlas = ExtResource("11_dinhu")
+region = Rect2(0, 0, 512, 0)
 
 [node name="Game" type="Node2D"]
 
@@ -132,6 +144,68 @@ grow_horizontal = 0
 scale = Vector2(1.83924, 1.41907)
 text = "Score: 0"
 horizontal_alignment = 2
+
+[node name="ShootSelector" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+clip_contents = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -120.0
+offset_right = 327.0
+offset_bottom = 1.0
+grow_vertical = 0
+size_flags_vertical = 4
+
+[node name="PlanetButton" type="Button" parent="CanvasLayer/ShootSelector"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 114.0
+offset_top = -107.0
+offset_right = 210.0
+offset_bottom = -11.0
+grow_vertical = 0
+toggle_mode = true
+button_group = ExtResource("10_kvuet")
+icon = SubResource("AtlasTexture_kvuet")
+icon_alignment = 1
+expand_icon = true
+
+[node name="SateliteButton" type="Button" parent="CanvasLayer/ShootSelector"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -107.0
+offset_right = 110.0
+offset_bottom = -11.0
+grow_vertical = 0
+toggle_mode = true
+button_group = ExtResource("10_kvuet")
+icon = ExtResource("11_kvuet")
+icon_alignment = 1
+expand_icon = true
+
+[node name="StarButton" type="Button" parent="CanvasLayer/ShootSelector"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_top = -107.0
+offset_right = 312.0
+offset_bottom = -11.0
+grow_vertical = 0
+toggle_mode = true
+button_group = ExtResource("10_kvuet")
+icon = SubResource("AtlasTexture_trtic")
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="child_entered_tree" from="." to="universe" method="_on_game_child_entered_tree"]
 [connection signal="child_entered_tree" from="universe" to="universe" method="_on_child_entered_tree"]
