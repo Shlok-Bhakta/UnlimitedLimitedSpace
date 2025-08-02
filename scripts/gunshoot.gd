@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 			var frame_tex := sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 			if frame_tex:
 				tex_size = frame_tex.get_size() * sprite.scale
-			spawn_offset = Vector2.RIGHT.rotated(self.global_rotation) * (tex_size.x * 0.5)
+			spawn_offset = Vector2.RIGHT.rotated(self.global_rotation) * (tex_size.y * 0.5)
 		
 		star.global_position = self.global_position + spawn_offset
 		star.global_rotation = self.global_rotation

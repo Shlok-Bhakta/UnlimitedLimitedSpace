@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dbs6iixj4bndm" path="res://assets/Planet/Planet3.png" id="1_b3r8t"]
 [ext_resource type="Texture2D" uid="uid://bd3v66dwkp1k7" path="res://assets/Planet/Planet1-Sheet.png" id="2_0f4d5"]
 [ext_resource type="Texture2D" uid="uid://3c2vw40nnw5k" path="res://assets/Planet/Planet2.png" id="3_fc43i"]
-[ext_resource type="Script" uid="uid://bdmvvmoo4eqog" path="res://scenes/Yeetables/randanimation.gd" id="5_fc43i"]
+[ext_resource type="Script" uid="uid://bdmvvmoo4eqog" path="res://scripts/randanimation.gd" id="5_fc43i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg5c7"]
 atlas = ExtResource("2_0f4d5")

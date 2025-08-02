@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b57dabky2lj3h" path="res://scripts/bodies.gd" id="1_3nm8g"]
 [ext_resource type="Texture2D" uid="uid://cdmmn7o6h5b2k" path="res://assets/Satelite/Satelite.png" id="1_t1poj"]
 [ext_resource type="Texture2D" uid="uid://fwwthk8gtaql" path="res://assets/Satelite/Satelite2.png" id="2_3nm8g"]
-[ext_resource type="Script" uid="uid://bdmvvmoo4eqog" path="res://scenes/Yeetables/randanimation.gd" id="4_8pxn7"]
+[ext_resource type="Script" uid="uid://bdmvvmoo4eqog" path="res://scripts/randanimation.gd" id="4_8pxn7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8pxn7"]
 animations = [{
