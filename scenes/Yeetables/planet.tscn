@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cc2x3wa7fow0m"]
+[gd_scene load_steps=12 format=3 uid="uid://cc2x3wa7fow0m"]
 
+[ext_resource type="Script" uid="uid://b57dabky2lj3h" path="res://scripts/bodies.gd" id="1_0f4d5"]
 [ext_resource type="Texture2D" uid="uid://dbs6iixj4bndm" path="res://assets/Planet/Planet3.png" id="1_b3r8t"]
 [ext_resource type="Texture2D" uid="uid://bd3v66dwkp1k7" path="res://assets/Planet/Planet1-Sheet.png" id="2_0f4d5"]
 [ext_resource type="Texture2D" uid="uid://3c2vw40nnw5k" path="res://assets/Planet/Planet2.png" id="3_fc43i"]
+[ext_resource type="Script" uid="uid://bdmvvmoo4eqog" path="res://scenes/Yeetables/randanimation.gd" id="5_fc43i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg5c7"]
 atlas = ExtResource("2_0f4d5")
@@ -64,8 +66,10 @@ animations = [{
 }]
 
 [node name="Planet" type="Node2D"]
+script = ExtResource("1_0f4d5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_jdniq")
 animation = &"Canada"
+script = ExtResource("5_fc43i")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpmh3w654mr7k"]
+[gd_scene load_steps=16 format=3 uid="uid://dpmh3w654mr7k"]
 
 [ext_resource type="PackedScene" uid="uid://dhx5ilfu2yke4" path="res://scenes/background.tscn" id="1_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dvvycmh1tdk16" path="res://scenes/universe.tscn" id="2_iywne"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://scripts/ship.gd" id="4_0tnpc"]
 [ext_resource type="Script" uid="uid://cn6w5mltx4alb" path="res://scripts/gunturn.gd" id="5_gee14"]
 [ext_resource type="Texture2D" uid="uid://cgdjfyn2854vi" path="res://assets/Ship/YeetGun-Sheet.png" id="6_0tnpc"]
+[ext_resource type="Script" uid="uid://dwo1hn6fcspyy" path="res://scripts/gunshoot.gd" id="8_gee14"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
 atlas = ExtResource("2_u5sy4")
@@ -72,6 +73,7 @@ animations = [{
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_p57ef")]
 
 [node name="universe" parent="." instance=ExtResource("2_iywne")]
+unique_name_in_owner = true
 
 [node name="SpaceShip" type="AnimatedSprite2D" parent="universe"]
 texture_filter = 1
@@ -84,14 +86,18 @@ script = ExtResource("4_0tnpc")
 [node name="Camera2D" type="Camera2D" parent="universe/SpaceShip"]
 scale = Vector2(1.54864, 5.71165)
 
-[node name="Node2D" type="Node2D" parent="universe/SpaceShip"]
+[node name="RotateAnchor" type="Node2D" parent="universe/SpaceShip"]
 rotation = -1.5708
 script = ExtResource("5_gee14")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="universe/SpaceShip/Node2D"]
+[node name="Gun" type="AnimatedSprite2D" parent="universe/SpaceShip/RotateAnchor"]
 texture_filter = 1
 position = Vector2(37.2415, 0)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_kvuet")
+
+[node name="StarSpawnPoint" type="Node2D" parent="universe/SpaceShip/RotateAnchor/Gun"]
+position = Vector2(0, -15)
+script = ExtResource("8_gee14")
 
 [node name="Timer" type="Timer" parent="universe/SpaceShip"]
