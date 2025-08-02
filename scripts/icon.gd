@@ -12,7 +12,6 @@ var angular_velocity: float = 0.0
 
 func _process(delta):
 	var angular_accel = 0.0
-	if Input.
 	if Input.is_action_pressed("rotate_left"):
 		angular_accel -= rotation_acceleration
 	if Input.is_action_pressed("rotate_right"):
