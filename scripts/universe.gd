@@ -25,6 +25,7 @@ var combo: float = 1.0
 var _eps2: float = 0.0
 
 @onready var space_ship: AnimatedSprite2D = $SpaceShip
+@onready var score_label: Label = %ScoreLabel
 
 func _ready() -> void:
 	_eps2 = max(1.0e-10, eps_len * eps_len)
@@ -170,7 +171,8 @@ func _update_score(bodies: Array) -> void:
 		combo = max(1.0, combo - combo_decay)
 	score_accum += orbit_points * combo * score_rate
 	score = int(score_accum)
-	print("score:", score, " combo:", combo)
+	score_label.text = str(score)
+	#print("score:", score, " combo:", combo)
 
 func _on_child_entered_tree(node: Node) -> void:
 	if node.get('Type') in ['Star', 'Planet', 'Satellite']:
