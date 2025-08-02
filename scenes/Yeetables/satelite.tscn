@@ -26,6 +26,8 @@ animations = [{
 
 [node name="Satelite" type="Node2D"]
 script = ExtResource("1_3nm8g")
+Mass = 0.1
+Type = "Satelite"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

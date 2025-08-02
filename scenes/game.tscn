@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=3 uid="uid://dpmh3w654mr7k"]
 
-[ext_resource type="PackedScene" uid="uid://dhx5ilfu2yke4" path="res://scenes/background.tscn" id="1_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dvvycmh1tdk16" path="res://scenes/universe.tscn" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/Ship/ShipMoving-Sheet.png" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://ci5gf41v3wees" path="res://assets/Ship/ShipStill.png" id="3_gee14"]
-[ext_resource type="Script" uid="uid://b2eq4dd1tkjdi" path="res://scripts/universe.gd" id="3_p57ef"]
+[ext_resource type="Script" path="res://scripts/universe.gd" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://scripts/ship.gd" id="4_0tnpc"]
 [ext_resource type="Script" uid="uid://cn6w5mltx4alb" path="res://scripts/gunturn.gd" id="5_gee14"]
 [ext_resource type="Texture2D" uid="uid://cgdjfyn2854vi" path="res://assets/Ship/YeetGun-Sheet.png" id="6_0tnpc"]
 [ext_resource type="Script" uid="uid://dwo1hn6fcspyy" path="res://scripts/gunshoot.gd" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://btv5vk8umggrv" path="res://assets/Background/Background2.png" id="9_0tnpc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
 atlas = ExtResource("2_u5sy4")
@@ -71,8 +71,6 @@ animations = [{
 
 [node name="Game" type="Node2D"]
 
-[node name="ParallaxBackground" parent="." instance=ExtResource("1_p57ef")]
-
 [node name="universe" parent="." instance=ExtResource("2_iywne")]
 unique_name_in_owner = true
 script = ExtResource("3_p57ef")
@@ -86,7 +84,6 @@ animation = &"moving"
 script = ExtResource("4_0tnpc")
 
 [node name="Camera2D" type="Camera2D" parent="universe/SpaceShip"]
-scale = Vector2(1.54864, 5.71165)
 
 [node name="RotateAnchor" type="Node2D" parent="universe/SpaceShip"]
 rotation = -1.5708
@@ -103,6 +100,20 @@ position = Vector2(0, -15)
 script = ExtResource("8_gee14")
 
 [node name="Timer" type="Timer" parent="universe/SpaceShip"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -100
+scroll_scale = Vector2(1.5, 1.5)
+repeat_size = Vector2(10240, 10240)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("9_0tnpc")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 10240, 10240)
 
 [connection signal="child_entered_tree" from="." to="universe" method="_on_game_child_entered_tree"]
 [connection signal="child_entered_tree" from="universe" to="universe" method="_on_child_entered_tree"]
