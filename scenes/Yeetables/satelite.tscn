@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnratesr8tp5s"]
+
+[ext_resource type="Texture2D" uid="uid://cdmmn7o6h5b2k" path="res://assets/Satelite/Satelite.png" id="1_t1poj"]
+[ext_resource type="Texture2D" uid="uid://fwwthk8gtaql" path="res://assets/Satelite/Satelite2.png" id="2_3nm8g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8pxn7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t1poj")
+}],
+"loop": true,
+"name": &"Satelite",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3nm8g")
+}],
+"loop": true,
+"name": &"Satelite2",
+"speed": 5.0
+}]
+
+[node name="Satelite" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8pxn7")
+animation = &"Satelite"

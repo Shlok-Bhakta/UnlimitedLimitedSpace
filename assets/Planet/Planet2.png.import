@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci5gf41v3wees"
-path="res://.godot/imported/ShipStill.png-ef1d198fbe4fa7f8ed9964ff71c00f91.ctex"
+uid="uid://3c2vw40nnw5k"
+path="res://.godot/imported/Planet2.png-bc8398aa7518e311d96a45190dd0ed53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ShipStill.png"
-dest_files=["res://.godot/imported/ShipStill.png-ef1d198fbe4fa7f8ed9964ff71c00f91.ctex"]
+source_file="res://assets/Planet/Planet2.png"
+dest_files=["res://.godot/imported/Planet2.png-bc8398aa7518e311d96a45190dd0ed53.ctex"]
 
 [params]
 

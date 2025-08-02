@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpmh3w654mr7k"]
+[gd_scene load_steps=16 format=3 uid="uid://dpmh3w654mr7k"]
 
 [ext_resource type="PackedScene" uid="uid://dhx5ilfu2yke4" path="res://scenes/background.tscn" id="1_p57ef"]
-[ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/ShipMoving-Sheet.png" id="2_u5sy4"]
-[ext_resource type="Texture2D" uid="uid://ci5gf41v3wees" path="res://assets/ShipStill.png" id="3_gee14"]
+[ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/Ship/ShipMoving-Sheet.png" id="2_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://ci5gf41v3wees" path="res://assets/Ship/ShipStill.png" id="3_gee14"]
 [ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://scripts/ship.gd" id="4_0tnpc"]
+[ext_resource type="Script" uid="uid://cn6w5mltx4alb" path="res://scripts/gunturn.gd" id="5_gee14"]
 [ext_resource type="PackedScene" uid="uid://drg6e0gukk6c2" path="res://scenes/stars.tscn" id="5_vtaks"]
+[ext_resource type="Texture2D" uid="uid://cgdjfyn2854vi" path="res://assets/Ship/YeetGun-Sheet.png" id="6_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://db4deuwd5qpqn" path="res://assets/icon.svg" id="6_kvpfn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
@@ -37,6 +39,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtaks"]
+atlas = ExtResource("6_0tnpc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
+atlas = ExtResource("6_0tnpc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dinhu"]
+atlas = ExtResource("6_0tnpc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvuet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtaks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvpfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dinhu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Game" type="Node2D"]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_p57ef")]
@@ -44,7 +75,6 @@ animations = [{
 [node name="SpaceShip" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -5)
-scale = Vector2(1, 1.20833)
 sprite_frames = SubResource("SpriteFrames_rj586")
 animation = &"moving"
 script = ExtResource("4_0tnpc")
@@ -52,7 +82,20 @@ script = ExtResource("4_0tnpc")
 [node name="Camera2D" type="Camera2D" parent="SpaceShip"]
 scale = Vector2(1.54864, 5.71165)
 
+[node name="Node2D" type="Node2D" parent="SpaceShip"]
+rotation = -1.5708
+script = ExtResource("5_gee14")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpaceShip/Node2D"]
+texture_filter = 1
+position = Vector2(37.2415, 1.62788e-06)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_kvuet")
+autoplay = "default"
+frame_progress = 0.293548
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("5_vtaks")]
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-330, 147)
 texture = ExtResource("6_kvpfn")
