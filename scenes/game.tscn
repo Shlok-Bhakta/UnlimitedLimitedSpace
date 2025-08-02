@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpmh3w654mr7k"]
+[gd_scene load_steps=9 format=3 uid="uid://dpmh3w654mr7k"]
 
 [ext_resource type="PackedScene" uid="uid://dhx5ilfu2yke4" path="res://scenes/background.tscn" id="1_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dvvycmh1tdk16" path="res://scenes/universe.tscn" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/ShipMoving-Sheet.png" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://ci5gf41v3wees" path="res://assets/ShipStill.png" id="3_gee14"]
 [ext_resource type="Script" uid="uid://bkalaj075i27h" path="res://scripts/ship.gd" id="4_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://drg6e0gukk6c2" path="res://scenes/stars.tscn" id="5_vtaks"]
-[ext_resource type="Texture2D" uid="uid://db4deuwd5qpqn" path="res://assets/icon.svg" id="6_kvpfn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
 atlas = ExtResource("2_u5sy4")
@@ -26,7 +25,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"moving",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -41,18 +40,18 @@ animations = [{
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_p57ef")]
 
-[node name="SpaceShip" type="AnimatedSprite2D" parent="."]
+[node name="universe" parent="." instance=ExtResource("2_iywne")]
+
+[node name="SpaceShip" type="AnimatedSprite2D" parent="universe"]
 texture_filter = 1
 position = Vector2(0, -5)
 scale = Vector2(1, 1.20833)
 sprite_frames = SubResource("SpriteFrames_rj586")
 animation = &"moving"
+frame_progress = 0.892168
 script = ExtResource("4_0tnpc")
 
-[node name="Camera2D" type="Camera2D" parent="SpaceShip"]
+[node name="Camera2D" type="Camera2D" parent="universe/SpaceShip"]
 scale = Vector2(1.54864, 5.71165)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("5_vtaks")]
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("6_kvpfn")
+[node name="Timer" type="Timer" parent="universe/SpaceShip"]

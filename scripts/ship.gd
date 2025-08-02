@@ -1,5 +1,8 @@
 extends AnimatedSprite2D
 
+const STARS = preload("res://scenes/stars.tscn")
+@onready var timer: Timer = $Timer
+
 @export var move_acceleration: float = 600.0      # Movement force
 @export var max_speed: float = 400.0              # Maximum linear speed
 @export var friction: float = 64.0                # Higher = more slippery
@@ -47,5 +50,13 @@ func _process(delta):
 		play("moving", 2)
 	else:
 		play("still")
+	
+	if Input.is_action_just_pressed("fire"):
+		var new_star = STARS.instantiate()
+		new_star.instantiate(randi_range(1, 200), Vector2.from_angle(self.global_rotation_degrees))
+		self.get_parent().add_child(new_star)
+		new_star.global_position = self.global_position
+		new_star.global_rotation_degrees = self.global_rotation_degrees
+		
 	velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	position += velocity * delta
