@@ -1,8 +1,8 @@
 extends Node2D
 const objects: Dictionary[String, PackedScene] = {
-	"STAR": preload("res://scenes/Yeetables/stars.tscn"),
-	"PLANET": preload("res://scenes/Yeetables/planet.tscn"),
-	"SATELITE": preload("res://scenes/Yeetables/satelite.tscn")
+	"Star": preload("res://scenes/Yeetables/stars.tscn"),
+	"Planet": preload("res://scenes/Yeetables/planet.tscn"),
+	"Satellite": preload("res://scenes/Yeetables/satelite.tscn")
 }
 
 @onready var universe_node: Node = %universe
@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 		var object_num = randi_range(0, len(objects.keys())-1)
 		var star_scene: Resource = objects.get(objects.keys()[object_num])
 		var star = star_scene.instantiate()
+		star.call('set_type', objects.keys()[object_num])
 		universe_node.add_child(star)
 		var spawn_offset := Vector2.ZERO
 		if star.has_node("AnimatedSprite2D"):
