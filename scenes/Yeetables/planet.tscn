@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://cc2x3wa7fow0m"]
+
+[ext_resource type="Texture2D" uid="uid://dbs6iixj4bndm" path="res://assets/Planet/Planet3.png" id="1_b3r8t"]
+[ext_resource type="Texture2D" uid="uid://bd3v66dwkp1k7" path="res://assets/Planet/Planet1-Sheet.png" id="2_0f4d5"]
+[ext_resource type="Texture2D" uid="uid://3c2vw40nnw5k" path="res://assets/Planet/Planet2.png" id="3_fc43i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sg5c7"]
+atlas = ExtResource("2_0f4d5")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uur4g"]
+atlas = ExtResource("2_0f4d5")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibklu"]
+atlas = ExtResource("2_0f4d5")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2s8k"]
+atlas = ExtResource("2_0f4d5")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfdjw"]
+atlas = ExtResource("2_0f4d5")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jdniq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b3r8t")
+}],
+"loop": true,
+"name": &"Canada",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg5c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uur4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibklu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2s8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfdjw")
+}],
+"loop": true,
+"name": &"Earth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fc43i")
+}],
+"loop": true,
+"name": &"Mars",
+"speed": 5.0
+}]
+
+[node name="Planet" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_jdniq")
+animation = &"Canada"
