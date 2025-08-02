@@ -9,6 +9,18 @@ const G: float = 4.0 * PI * PI
 @export var max_speed: float = 400.0
 @export var snap_orbit: bool = true
 @export var snap_lerp: float = 0.35
+@export var score: int = 0
+var score_accum: float = 0.0
+var combo: float = 1.0
+@export var combo_gain: float = 0.05
+@export var combo_decay: float = 0.1
+@export var score_rate: float = 1.0
+@export var orbit_radial_tol: float = 0.6
+@export var orbit_speed_low: float = 0.6
+@export var orbit_speed_high: float = 1.4
+@export var score_satellite: int = 5
+@export var score_planet: int = 3
+@export var score_star: int = 0
 
 var _eps2: float = 0.0
 
@@ -22,6 +34,7 @@ func _physics_process(_delta: float) -> void:
 	if bodies.is_empty():
 		return
 	_step_arcade(bodies, dt_sim)
+	_update_score(bodies)
 
 func _collect_bodies() -> Array:
 	var out: Array = []
@@ -116,6 +129,48 @@ func _type_speed_scale(n: Node) -> float:
 	if t == 'Star':
 		return 0.6
 	return 1.0
+
+func _is_orbiting(primary: Node, body: Node) -> bool:
+	var dr: Vector2 = body.position - primary.position
+	var r: float = max(1e-6, dr.length())
+	var v: Vector2 = body.Velocity
+	var dir_r: Vector2 = dr / r
+	var radial: float = v.dot(dir_r)
+	var tangential: float = abs(v.cross(dir_r))
+	var v_circ: float = sqrt(max(0.0, gravity_strength * G * primary.Mass / r))
+	if abs(radial) > orbit_radial_tol * v_circ:
+		return false
+	if tangential < orbit_speed_low * v_circ:
+		return false
+	if tangential > orbit_speed_high * v_circ:
+		return false
+	return true
+
+func _type_score(n: Node) -> int:
+	var t: String = n.get('Type')
+	if t == 'Satellite':
+		return score_satellite
+	if t == 'Planet':
+		return score_planet
+	return score_star
+
+func _update_score(bodies: Array) -> void:
+	var orbit_points: float = 0.0
+	var orbiting_any := false
+	for body in bodies:
+		var primary := _preferred_primary(bodies, body)
+		if primary == null:
+			continue
+		if _is_orbiting(primary, body):
+			orbiting_any = true
+			orbit_points += float(_type_score(body))
+	if orbiting_any:
+		combo += combo_gain
+	else:
+		combo = max(1.0, combo - combo_decay)
+	score_accum += orbit_points * combo * score_rate
+	score = int(score_accum)
+	print("score:", score, " combo:", combo)
 
 func _on_child_entered_tree(node: Node) -> void:
 	if node.get('Type') in ['Star', 'Planet', 'Satellite']:
