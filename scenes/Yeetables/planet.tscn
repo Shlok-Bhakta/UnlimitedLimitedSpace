@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cc2x3wa7fow0m"]
+[gd_scene load_steps=13 format=3 uid="uid://cc2x3wa7fow0m"]
 
 [ext_resource type="Script" uid="uid://b57dabky2lj3h" path="res://scripts/bodies.gd" id="1_0f4d5"]
 [ext_resource type="Texture2D" uid="uid://dbs6iixj4bndm" path="res://assets/Planet/Planet3.png" id="1_b3r8t"]
@@ -65,6 +65,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc43i"]
+radius = 64.3817
+
 [node name="Planet" type="Node2D"]
 script = ExtResource("1_0f4d5")
 Mass = 500.0
@@ -75,3 +78,8 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_jdniq")
 animation = &"Canada"
 script = ExtResource("5_fc43i")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("CircleShape2D_fc43i")

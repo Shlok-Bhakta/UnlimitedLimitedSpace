@@ -9,6 +9,9 @@ const objects: Dictionary[String, PackedScene] = {
 @onready var planet_button: Button = %ShootSelector/PlanetButton
 @onready var group: ButtonGroup = planet_button.button_group
 
+signal spawn_object(obj: Node2D)
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if get_viewport().gui_get_hovered_control() != null:
@@ -47,3 +50,4 @@ func _shoot_selected() -> void:
 		spawn_offset = forward * half_len
 	node.global_position = self.global_position + spawn_offset
 	node.global_rotation = self.global_rotation
+	spawn_object.emit(node)

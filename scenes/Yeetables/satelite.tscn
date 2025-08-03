@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnratesr8tp5s"]
+[gd_scene load_steps=7 format=3 uid="uid://cnratesr8tp5s"]
 
 [ext_resource type="Script" uid="uid://b57dabky2lj3h" path="res://scripts/bodies.gd" id="1_3nm8g"]
 [ext_resource type="Texture2D" uid="uid://cdmmn7o6h5b2k" path="res://assets/Satelite/Satelite.png" id="1_t1poj"]
@@ -24,6 +24,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pxn7"]
+size = Vector2(30, 14)
+
 [node name="Satelite" type="Node2D"]
 script = ExtResource("1_3nm8g")
 Mass = 0.1
@@ -34,3 +37,8 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8pxn7")
 animation = &"Satelite2"
 script = ExtResource("4_8pxn7")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("RectangleShape2D_8pxn7")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpmh3w654mr7k"]
+[gd_scene load_steps=27 format=3 uid="uid://dpmh3w654mr7k"]
 
 [ext_resource type="PackedScene" uid="uid://dvvycmh1tdk16" path="res://scenes/universe.tscn" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://ctlq8qll1tkqd" path="res://assets/Ship/ShipMoving-Sheet.png" id="2_u5sy4"]
@@ -81,13 +81,21 @@ region = Rect2(0, 0, 128, 0)
 atlas = ExtResource("11_dinhu")
 region = Rect2(0, 0, 512, 0)
 
+[sub_resource type="LabelSettings" id="LabelSettings_kvuet"]
+font_size = 29
+
+[sub_resource type="LabelSettings" id="LabelSettings_trtic"]
+font_size = 23
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
+bg_color = Color(0.0578908, 0.0578753, 0.138584, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ca42v"]
+bg_color = Color(0.0821677, 0.0831503, 0.181423, 1)
+
 [node name="Game" type="Node2D"]
 
-[node name="universe" parent="." instance=ExtResource("2_iywne")]
-unique_name_in_owner = true
-script = ExtResource("3_p57ef")
-
-[node name="SpaceShip" type="AnimatedSprite2D" parent="universe"]
+[node name="SpaceShip" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -5)
 scale = Vector2(1, 1.20833)
@@ -95,26 +103,31 @@ sprite_frames = SubResource("SpriteFrames_rj586")
 animation = &"moving"
 script = ExtResource("4_0tnpc")
 
-[node name="Camera2D" type="Camera2D" parent="universe/SpaceShip"]
+[node name="Camera2D" type="Camera2D" parent="SpaceShip"]
 
-[node name="RotateAnchor" type="Node2D" parent="universe/SpaceShip"]
+[node name="RotateAnchor" type="Node2D" parent="SpaceShip"]
 rotation = -1.5708
 script = ExtResource("5_gee14")
 
-[node name="Gun" type="AnimatedSprite2D" parent="universe/SpaceShip/RotateAnchor"]
+[node name="Gun" type="AnimatedSprite2D" parent="SpaceShip/RotateAnchor"]
 texture_filter = 1
 position = Vector2(37.2415, 0)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_kvuet")
 
-[node name="StarSpawnPoint" type="Node2D" parent="universe/SpaceShip/RotateAnchor/Gun"]
+[node name="StarSpawnPoint" type="Node2D" parent="SpaceShip/RotateAnchor/Gun"]
 position = Vector2(0, -15)
 script = ExtResource("8_gee14")
 
-[node name="Timer" type="Timer" parent="universe/SpaceShip"]
+[node name="Timer" type="Timer" parent="SpaceShip"]
+
+[node name="universe" parent="." instance=ExtResource("2_iywne")]
+unique_name_in_owner = true
+script = ExtResource("3_p57ef")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = -100
+texture_filter = 1
 scale = Vector2(1.53, 1.53)
 scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(10240, 10240)
@@ -207,5 +220,67 @@ icon = SubResource("AtlasTexture_trtic")
 icon_alignment = 1
 expand_icon = true
 
+[node name="LosePanel" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -158.0
+offset_right = 147.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OOFLabel" type="Label" parent="CanvasLayer/LosePanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 17.0
+offset_right = 289.0
+offset_bottom = 51.0
+text = "OOF You Lost"
+label_settings = SubResource("LabelSettings_kvuet")
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/LosePanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 76.0
+offset_right = 289.0
+offset_bottom = 116.0
+text = "Score: -1"
+label_settings = SubResource("LabelSettings_trtic")
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="CanvasLayer/LosePanel"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 147.0
+offset_right = 263.0
+offset_bottom = 269.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_ir15t")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ca42v")
+text = "Play Again?"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -277.0
+offset_top = -99.0
+grow_horizontal = 0
+grow_vertical = 0
+bbcode_enabled = true
+text = "WASD -Move
+Left Click - Spawn
+Get the most things to loop around in orbit for a higher score :)"
+
 [connection signal="child_entered_tree" from="." to="universe" method="_on_game_child_entered_tree"]
+[connection signal="spawn_object" from="SpaceShip/RotateAnchor/Gun/StarSpawnPoint" to="universe" method="_on_star_spawn_point_spawn_object"]
 [connection signal="child_entered_tree" from="universe" to="universe" method="_on_child_entered_tree"]
+[connection signal="pressed" from="CanvasLayer/LosePanel/Restart" to="universe" method="_on_restart_pressed"]
